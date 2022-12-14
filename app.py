@@ -108,7 +108,7 @@ elif income == "$100K-$150K":
 else:
  income =9
 
-eduction = st.selectbox("Select Education Level",["Less than Highschool",
+education = st.selectbox("Select Education Level",["Less than Highschool",
                                                   "Highschool Incomplete",
                                                   "Highschool Graduate",
                                                   "Some college, no degree",
@@ -156,17 +156,17 @@ else:
  
 age = st.slider("What is your age?", 0,98)
 #use model to make predictions
-newdata =[income,eduction,parent,married,female,age]
+newdata =[income,education,parent,married,female,age]
 # Predict class, given input features classified as 1 or 0 if prob is over 0.5
 predicted_class = lr.predict([newdata])
-if predted_class == 1:
+if predicted_class[0] == 1:
  predicted_class = "Linkedin user"
 else: predicted_class = "Not a Linkedin user"
 
 # Generate probability of positive class (=1)
 probs = lr.predict_proba([newdata])
 
-st.markdown(f"Predicted class: **{predicted_class[0]}**") # 0=not pro-environment, 1=pro-envronment
+st.markdown(f"Predicted class: **{predicted_class}**") # 0=not pro-environment, 1=pro-envronment
 st.markdown(f"Probability that this person is a linkedin user is: **{probs[0][1]}**")
 
 
