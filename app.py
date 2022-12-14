@@ -9,7 +9,7 @@ from sklearn.metrics import confusion_matrix
 #cmatrix shows how many predictions are correct
 
 #add header to describe app 
-st.markdown("#Welcome to my Logist Regression App: Predicitng a Linkedin User")
+st.markdown("# Welcome to my Logist Regression App: Predicitng a Linkedin User")
 st.markdown("## Please answer the following questions")
 #user inputs
 
