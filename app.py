@@ -168,31 +168,9 @@ probs = lr.predict_proba([newdata])
 
 probins = round(probs[0][1],4)*100
 
-import plotly.graph_objects as go
-if  probs[0][1] < .5:
-    label = "Low Prob"
 
-else:
-    label = "High Prob"
     
-##### Show results
-
-#### Print sentiment score, label, and language
  
-
-#### Create sentiment gauge
-fig = go.Figure(go.Indicator(
-    mode = "gauge+number",
-    value =  probs[0][1],
-    title = {'text': f"Probability: {label}"},
-    gauge = {"axis": {"range": [0, 1]},
-            "steps": [
-                {"range": [0, .5], "color":"red"},
-                  
-                {"range": [.5, 1], "color":"lightgreen"}
-            ],
-            "bar":{"color":"yellow"}}
-))
 
 
 
@@ -200,7 +178,7 @@ fig = go.Figure(go.Indicator(
 if st.button("Predict"):
     st.markdown(f"Predicted class: **{predicted_class}**") # 0=not pro-environment, 1=pro-envronment
     st.markdown(f"Probability that this person is a linkedin user is: **{probins}%**")
-    st.plotly_chart(fig)
+     
 else:
     st.markdown("Awaiting prediction")
 
