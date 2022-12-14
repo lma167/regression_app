@@ -10,7 +10,7 @@ from sklearn.metrics import confusion_matrix
 
 #add header to describe app 
 st.markdown("#Welcome to my Logist Regression App: Predicitng a Linkedin User")
-
+st.markdown("## Please answer the following questions")
 #user inputs
 
 #inget data
@@ -80,22 +80,94 @@ y_pred = lr.predict(X_test)
 
 
 
-income = st.selectbox("Select Income",[1,2,3,4,5,6,7,8,9])
-eduction = st.selectbox("Select Education Level",[1,2,3,4,5,6,7,8])
-parent = st.radio("Parent? (1 indicates Yes)",[1,0])
-married = st.radio("Married? (1 indicates Yes)",[1,0])
-female = st.radio("Female? (1 indicates Yes)",[1,0])
+income = st.selectbox("Select Income",["<$10K",
+                                       "$10K-$20K",
+                                       "$20K-$30K",
+                                       "$30K-$40K",
+                                       "$40K-$50K",
+                                       "$50K-$75K",
+                                       "$75K-$100K",
+                                       "$100K-$150K",
+                                       ">=$150K"])
+if income =="<$10K":
+ income = 1
+elif income == "$10K-$20K":
+ income = 2
+elif income == "$20K-$30K":
+ income = 3
+elif income == "$30K-$40K":
+ income = 4 
+elif income == "$40K-$50K":
+ income = 5
+elif income == "$50K-$75K":
+ income = 6
+elif income == "$75K-$100K":
+ income = 7
+elif income == "$100K-$150K":
+ income = 8
+else:
+ income =9
+
+eduction = st.selectbox("Select Education Level",["Less than Highschool",
+                                                  "Highschool Incomplete",
+                                                  "Highschool Graduate",
+                                                  "Some college, no degree",
+                                                  "Two-year associate degree from a college or university",
+                                                  "Four-year college or university degree/Bachelor's degree",
+                                                  "Some post-graduate or professional schooling, no postgrad degree",
+                                                  "Postgraducation or professional degree (masters, medical, doctorate, or law)"])
+if education =="Less than Highschool":
+ education = 1
+elif education == "Highschool Incomplete":
+ education = 2
+elif education == "Highschool Graduate":
+ education = 3
+elif education == "Some college, no degree":
+ education = 4 
+elif education == "Two-year associate degree from a college or university":
+ education = 5
+elif education == "Four-year college or university degree/Bachelor's degree":
+ education = 6
+elif education == "Some post-graduate or professional schooling, no postgrad degree":
+ education = 7
+else:
+ education = 8
+
+parent = st.radio("Parent?",["Yes","No"])
+if parent == "Yes":
+ parent = 1
+else:
+ parent = 0
+ 
+
+married = st.radio("Married?",["Yes","No"])
+if married == "Yes":
+ married =1 
+else:
+ married = 0
+
+
+female = st.radio("Female?",["Yes","No"])
+ 
+if female == "Yes":
+ female =1 
+else:
+ female = 0
+ 
 age = st.slider("What is your age?", 0,98)
 #use model to make predictions
 newdata =[income,eduction,parent,married,female,age]
 # Predict class, given input features classified as 1 or 0 if prob is over 0.5
 predicted_class = lr.predict([newdata])
+if predted_class == 1:
+ predicted_class = "Linkedin user"
+else: predicted_class = "Not a Linkedin user"
 
 # Generate probability of positive class (=1)
 probs = lr.predict_proba([newdata])
 
 st.markdown(f"Predicted class: **{predicted_class[0]}**") # 0=not pro-environment, 1=pro-envronment
-st.markdown(f"Probability that this person is pro-environment: **{probs[0][1]}**")
+st.markdown(f"Probability that this person is a linkedin user is: **{probs[0][1]}**")
 
 
          
