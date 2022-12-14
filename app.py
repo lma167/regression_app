@@ -38,9 +38,9 @@ ss = pd.DataFrame({
     "sm_li": clean_sm(s.web1h),
     "income": np.where(s["income"] > 9, np.nan, s["income"]),
     "education": np.where(s["educ2"] > 8, np.nan, s["educ2"]),
-    "parent": clean_sm(s.par ),
-    "married": clean_sm(s.marital),
-    "female": np.where(input == 2, 1, 0),
+    "parent": np.where(s.par == 2, False, np.where(s.par < 2, True, np.nan)),
+    "married": np.where(s["marital"] > 6, np.nan, np.where(s.marital < 2, True, False)),
+    "female": np.where(s.gender == 2, True, np.where(s.gender < 4, False, np.nan)),
     "age":np.where(s["age"] > 98, np.nan, s["age"]),
 })
 
@@ -166,8 +166,15 @@ else: predicted_class = "Not a Linkedin user"
 # Generate probability of positive class (=1)
 probs = lr.predict_proba([newdata])
 
-st.markdown(f"Predicted class: **{predicted_class}**") # 0=not pro-environment, 1=pro-envronment
-st.markdown(f"Probability that this person is a linkedin user is: **{probs[0][1]}**")
+probins = round(probs[0][1],2)*100
+
+if st.button("Predict"):
+    st.markdown(f"Predicted class: **{predicted_class}**") # 0=not pro-environment, 1=pro-envronment
+    st.markdown(f"Probability that this person is a linkedin user is: **{probins}**")
+else:
+    st.markdown("Awaiting prediction")
+
+
 
 
          
