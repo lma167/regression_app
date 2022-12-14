@@ -166,11 +166,11 @@ else: predicted_class = "Not a Linkedin user"
 # Generate probability of positive class (=1)
 probs = lr.predict_proba([newdata])
 
-probins = round(probs[0][1],2)*100
+probins = round(probs[0][1],4)*100
 
 if st.button("Predict"):
     st.markdown(f"Predicted class: **{predicted_class}**") # 0=not pro-environment, 1=pro-envronment
-    st.markdown(f"Probability that this person is a linkedin user is: **{probins}**")
+    st.markdown(f"Probability that this person is a linkedin user is: **{probins}%**")
 else:
     st.markdown("Awaiting prediction")
 
